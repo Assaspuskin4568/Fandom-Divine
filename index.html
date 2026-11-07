@@ -5,15 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divine - Wiki Profile</title>
     <style>
-        /* Фон для всего сайта */
+        /* Применяем правильные размеры ко всем элементам */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* ФИКС ФОНА: Создаем неподвижный слой на заднем плане */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-image: url('background_divine.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #121212; /* Темный цвет, если картинка не прогрузилась */
+        }
+
+        /* Основной фон сайта */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('background_divine.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background-color: transparent; /* Пропускаем фоновый слой */
+            min-height: 100vh;
             color: #d5d4d5;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            overflow-x: hidden; /* Запрет на съезд вбок */
         }
 
         /* Контейнер с полупрозрачным фоном */
@@ -23,15 +45,17 @@
             display: flex;
             gap: 20px;
             align-items: flex-start;
-            background-color: rgba(18, 18, 18, 0.9);
+            background-color: rgba(18, 18, 18, 0.95);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            width: 100%;
         }
 
         /* Основной контент (слева) */
         .main-content {
             flex: 1;
+            min-width: 0; /* Защита от переполнения */
         }
 
         .main-content h1 {
@@ -40,6 +64,7 @@
             border-bottom: 1px solid #444;
             padding-bottom: 5px;
             margin-bottom: 20px;
+            word-wrap: break-word;
         }
 
         .main-content h2 {
@@ -48,6 +73,7 @@
             border-bottom: 1px solid #333;
             padding-bottom: 5px;
             margin-top: 30px;
+            word-wrap: break-word;
         }
 
         .main-content h3 {
@@ -55,6 +81,13 @@
             color: #ffcc00;
             margin-top: 25px;
             margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        /* Перенос длинных слов во всем тексте */
+        p, li {
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         /* Инфобокс (справа) */
@@ -129,12 +162,42 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap; /* Позволяет элементам переноситься на мобильных */
         }
 
-        /* Адаптивность для телефонов */
+        .music-player audio {
+            max-width: 100%;
+            height: 40px;
+        }
+
+        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ */
         @media (max-width: 768px) {
-            .wiki-container { flex-direction: column; padding: 15px; }
-            .infobox { width: 100%; order: -1; }
+            body { 
+                padding: 10px; 
+            }
+            .wiki-container { 
+                flex-direction: column; 
+                padding: 15px; 
+                gap: 15px;
+            }
+            .infobox { 
+                width: 100%; 
+                order: -1; 
+            }
+            /* Плееры встают в столбик и занимают всю ширину */
+            .music-player {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .music-player audio {
+                width: 100%;
+                display: block;
+            }
+            /* Уменьшаем отступы для маленьких экранов */
+            .main-content h1 { font-size: 1.8em; }
+            .main-content h2 { font-size: 1.3em; }
+            ul { padding-left: 15px; }
         }
     </style>
 </head>
@@ -155,7 +218,7 @@
                 </audio>
             </div>
 
-            <!-- Плеер со смехом (выглядит точно так же) -->
+            <!-- Плеер со смехом -->
             <div class="music-player">
                 <span>🔊 Laugh:</span>
                 <audio controls>
