@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divine - Wiki Profile</title>
+    
+    <!-- ВОТ ОНА, ТВОЯ ИКОНКА -->
+    <link rel="icon" type="image/jpeg" href="Divine_Icon.jpg">
+
     <style>
         html { background-color: #121212; }
         * { box-sizing: border-box; }
@@ -50,7 +54,6 @@
 
         .main-content { flex: 1; min-width: 0; }
 
-        /* Стили для заголовков */
         .main-content h1 {
             font-size: 2.2em;
             color: #ffffff;
@@ -79,7 +82,6 @@
 
         p, li { overflow-wrap: anywhere; word-break: break-word; }
 
-        /* Кнопки языков */
         .lang-toggle {
             display: flex;
             gap: 10px;
@@ -109,7 +111,6 @@
             box-shadow: 0 0 10px rgba(255,0,0,0.3);
         }
 
-        /* Карточка (Инфобокс) */
         .infobox {
             width: 300px;
             background-color: #1e1e1e;
@@ -160,7 +161,6 @@
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
 
-        /* Плееры */
         .music-player {
             margin-bottom: 15px;
             background-color: #1e1e1e;
@@ -190,13 +190,11 @@
     <div class="wiki-container">
         
         <div class="main-content">
-            <!-- Название персонажа -->
             <h1>
                 <span class="lang-en">Divine</span>
                 <span class="lang-ru hidden">Божественный</span>
             </h1>
             
-            <!-- Плеер темы -->
             <div class="music-player">
                 <span class="lang-en">🎵 Theme:</span>
                 <span class="lang-ru hidden">🎵 Тема:</span>
@@ -205,7 +203,6 @@
                 </audio>
             </div>
 
-            <!-- Плеер смеха -->
             <div class="music-player">
                 <span class="lang-en">🔊 Laugh:</span>
                 <span class="lang-ru hidden">🔊 Смех:</span>
@@ -221,7 +218,6 @@
             <p class="lang-en">Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
             <p class="lang-ru hidden">Divine (Божественный) — персонаж, созданный <strong>rudolfgods</strong>. Истинная природа этой сущности остается загадкой, но его присутствие охватывает как внешний мир, так и игровую вселенную.</p>
 
-            <!-- Кнопки языков -->
             <div class="lang-toggle">
                 <button id="btn-en" class="lang-btn active" onclick="setLang('en')">
                     <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; height: auto; border-radius: 2px;"> English
@@ -260,7 +256,6 @@
                 <span class="lang-ru hidden">Появление</span>
             </h2>
             
-            <!-- АНГЛИЙСКАЯ ИСТОРИЯ -->
             <div class="lang-en">
                 <h3>The 1990s - The Ritual</h3>
                 <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
@@ -293,7 +288,6 @@
                 <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
             </div>
 
-            <!-- РУССКАЯ ИСТОРИЯ -->
             <div class="lang-ru hidden">
                 <h3>1990-е годы - Ритуал</h3>
                 <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
@@ -380,9 +374,7 @@
 
         </div>
 
-        <!-- Правая часть (Инфобокс) -->
         <div class="infobox">
-            <!-- Название в карточке -->
             <div class="infobox-title">
                 <span class="lang-en">Divine</span>
                 <span class="lang-ru hidden">Божественный</span>
