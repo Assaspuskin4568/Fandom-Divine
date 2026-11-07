@@ -42,6 +42,7 @@
             border-bottom: 1px solid #333;
             padding-bottom: 5px;
             margin-top: 30px;
+            clear: both; /* Чтобы заголовки не наезжали на картинку */
         }
 
         /* Стиль для годов и подзаголовков в истории */
@@ -50,6 +51,16 @@
             color: #ffcc00;
             margin-top: 25px;
             margin-bottom: 10px;
+        }
+
+        /* Стиль для большой картинки слева */
+        .main-image {
+            float: left;
+            width: 280px; /* Ширина картинки */
+            margin: 0 20px 15px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
 
         /* Инфобокс (справа) */
@@ -70,18 +81,6 @@
             font-weight: bold;
             padding: 10px;
             border-bottom: 1px solid #333;
-        }
-
-        .infobox-image {
-            text-align: center;
-            padding: 10px;
-            border-bottom: 1px solid #333;
-        }
-
-        .infobox-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 3px;
         }
 
         .infobox-section-header {
@@ -111,23 +110,14 @@
             width: 60%;
         }
 
-        /* Списки */
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
 
         /* Адаптивность для телефонов */
         @media (max-width: 768px) {
-            .wiki-container {
-                flex-direction: column;
-            }
-            .infobox {
-                width: 100%;
-                order: -1;
-            }
+            .wiki-container { flex-direction: column; }
+            .infobox { width: 100%; order: -1; }
+            .main-image { float: none; display: block; margin: 0 auto 20px auto; width: 100%; max-width: 300px; }
         }
     </style>
 </head>
@@ -139,6 +129,9 @@
         <div class="main-content">
             <h1>Divine</h1>
             
+            <!-- Вот здесь мы добавили картинку -->
+            <img src="full_height_divine.jpg" alt="Divine Full Height" class="main-image">
+
             <h2>Overview</h2>
             <p>Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
             
@@ -217,10 +210,6 @@
         <!-- Правая часть (Инфобокс как на Fandom) -->
         <div class="infobox">
             <div class="infobox-title">Divine</div>
-            
-            <div class="infobox-image">
-                <img src="divine.jpg" alt="Divine Character Image" onerror="this.style.display='none'">
-            </div>
 
             <div class="infobox-section-header">Biographical Information</div>
             
