@@ -8,10 +8,8 @@
         html { background-color: #121212; }
         * { box-sizing: border-box; }
 
-        /* Скрытые элементы для переключения языка */
         .hidden { display: none !important; }
 
-        /* ФИКС ФОНА */
         body::before {
             content: "";
             position: fixed;
@@ -52,6 +50,7 @@
 
         .main-content { flex: 1; min-width: 0; }
 
+        /* Стили для заголовков */
         .main-content h1 {
             font-size: 2.2em;
             color: #ffffff;
@@ -78,12 +77,9 @@
             word-wrap: break-word;
         }
 
-        p, li {
-            overflow-wrap: anywhere;
-            word-break: break-word;
-        }
+        p, li { overflow-wrap: anywhere; word-break: break-word; }
 
-        /* Кнопки переключения языка */
+        /* Кнопки языков */
         .lang-toggle {
             display: flex;
             gap: 10px;
@@ -113,7 +109,7 @@
             box-shadow: 0 0 10px rgba(255,0,0,0.3);
         }
 
-        /* Инфобокс */
+        /* Карточка (Инфобокс) */
         .infobox {
             width: 300px;
             background-color: #1e1e1e;
@@ -139,11 +135,7 @@
             border-bottom: 1px solid #333;
         }
 
-        .infobox-image img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+        .infobox-image img { max-width: 100%; height: auto; display: block; }
 
         .infobox-section-header {
             background-color: #2a2a2a;
@@ -162,17 +154,13 @@
             display: flex;
         }
 
-        .infobox-label {
-            font-weight: bold;
-            width: 40%;
-            color: #b0b0b0;
-        }
-
+        .infobox-label { font-weight: bold; width: 40%; color: #b0b0b0; }
         .infobox-data { width: 60%; }
 
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
 
+        /* Плееры */
         .music-player {
             margin-bottom: 15px;
             background-color: #1e1e1e;
@@ -202,17 +190,25 @@
     <div class="wiki-container">
         
         <div class="main-content">
-            <h1>Divine</h1>
+            <!-- Название персонажа -->
+            <h1>
+                <span class="lang-en">Divine</span>
+                <span class="lang-ru hidden">Божественный</span>
+            </h1>
             
+            <!-- Плеер темы -->
             <div class="music-player">
-                <span>🎵 Theme:</span>
+                <span class="lang-en">🎵 Theme:</span>
+                <span class="lang-ru hidden">🎵 Тема:</span>
                 <audio controls loop>
                     <source src="-Divine SEE you 1-2 layer.ogg" type="audio/ogg">
                 </audio>
             </div>
 
+            <!-- Плеер смеха -->
             <div class="music-player">
-                <span>🔊 Laugh:</span>
+                <span class="lang-en">🔊 Laugh:</span>
+                <span class="lang-ru hidden">🔊 Смех:</span>
                 <audio controls>
                     <source src="Divine_Laugh.mp3" type="audio/mpeg">
                 </audio>
@@ -225,7 +221,7 @@
             <p class="lang-en">Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
             <p class="lang-ru hidden">Divine (Божественный) — персонаж, созданный <strong>rudolfgods</strong>. Истинная природа этой сущности остается загадкой, но его присутствие охватывает как внешний мир, так и игровую вселенную.</p>
 
-            <!-- Кнопки языков с картинками флагов -->
+            <!-- Кнопки языков -->
             <div class="lang-toggle">
                 <button id="btn-en" class="lang-btn active" onclick="setLang('en')">
                     <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; height: auto; border-radius: 2px;"> English
@@ -386,7 +382,11 @@
 
         <!-- Правая часть (Инфобокс) -->
         <div class="infobox">
-            <div class="infobox-title">Divine</div>
+            <!-- Название в карточке -->
+            <div class="infobox-title">
+                <span class="lang-en">Divine</span>
+                <span class="lang-ru hidden">Божественный</span>
+            </div>
             
             <div class="infobox-image">
                 <img src="full_height_divine.jpg" alt="Divine Portrait">
