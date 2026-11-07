@@ -1,34 +1,213 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Профиль персонажа</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine - Wiki Profile</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #ff0000; text-align: center; }
-        .info-block { background-color: #2a2a2a; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .info-block strong { color: #ffcc00; }
+        /* Общие настройки в стиле Fandom */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #d5d4d5;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .wiki-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        /* Основной контент (слева) */
+        .main-content {
+            flex: 1;
+        }
+
+        .main-content h1 {
+            font-size: 2.2em;
+            color: #ffffff;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .main-content h2 {
+            font-size: 1.5em;
+            color: #ffffff;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        /* Инфобокс (справа) */
+        .infobox {
+            width: 300px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 3px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .infobox-title {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .infobox-image {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Сюда можно вставить картинку */
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 3px;
+        }
+
+        .infobox-section-header {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+            margin-top: 5px;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .infobox-row {
+            padding: 8px 10px;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+        }
+
+        .infobox-label {
+            font-weight: bold;
+            width: 40%;
+            color: #b0b0b0;
+        }
+
+        .infobox-data {
+            width: 60%;
+        }
+
+        /* Списки */
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Адаптивность для телефонов */
+        @media (max-width: 768px) {
+            .wiki-container {
+                flex-direction: column;
+            }
+            .infobox {
+                width: 100%;
+                order: -1; /* Инфобокс будет сверху на телефонах */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Имя Вашего Персонажа</h1>
+    <div class="wiki-container">
+        
+        <!-- Левая часть (основной текст) -->
+        <div class="main-content">
+            <h1>Divine</h1>
+            
+            <h2>Overview</h2>
+            <p>Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
+            
+            <h2>Occupation</h2>
+            <ul>
+                <li>Exploring the outside world and the in-game world.</li>
+                <li>Gaining new knowledge.</li>
+                <li>Creating new game worlds and characters.</li>
+                <li>A creative approach to murder.</li>
+            </ul>
 
-    <div class="info-block">
-        <p><strong>Возраст:</strong> 25 лет</p>
-        <p><strong>Рост:</strong> 180 см</p>
-        <p><strong>Характер:</strong> Спокойный, но опасный.</p>
+            <h2>Physical Description</h2>
+            <p>Divine possesses a striking appearance. Their coat color is brownish-scarlet, making them stand out in their environment. Their eyes are completely black, but their pupils turn white when they become enraged.</p>
+            <ul>
+                <li><strong>Height:</strong> 1 ' 70 cm</li>
+                <li><strong>Weight:</strong> 50 kg.</li>
+            </ul>
+        </div>
+
+        <!-- Правая часть (Инфобокс как на Fandom) -->
+        <div class="infobox">
+            <div class="infobox-title">Divine</div>
+            
+            <!-- Место для картинки. Если ее нет, этот блок можно удалить -->
+            <div class="infobox-image">
+                <!-- Замените 'divine.jpg' на имя вашего файла с картинкой, если загрузите его -->
+                <img src="divine.jpg" alt="Divine Character Image" onerror="this.style.display='none'">
+            </div>
+
+            <div class="infobox-section-header">Biographical Information</div>
+            
+            <div class="infobox-row">
+                <div class="infobox-label">Gender</div>
+                <div class="infobox-data">Male</div>
+            </div>
+            
+            <div class="infobox-row">
+                <div class="infobox-label">Pseudonyms</div>
+                <div class="infobox-data">God, Deity, All-seeing, A Living nightmare</div>
+            </div>
+            
+            <div class="infobox-row">
+                <div class="infobox-label">The type is</div>
+                <div class="infobox-data">Unknown</div>
+            </div>
+
+            <div class="infobox-section-header">Physical Description</div>
+            
+            <div class="infobox-row">
+                <div class="infobox-label">Height</div>
+                <div class="infobox-data">1 ' 70 cm</div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">Weight</div>
+                <div class="infobox-data">50 kg</div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">Coat color</div>
+                <div class="infobox-data">Brownish-scarlet</div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">Eye color</div>
+                <div class="infobox-data">Black / white pupils (when enraged)</div>
+            </div>
+            
+            <div class="infobox-section-header">Creation</div>
+            <div class="infobox-row">
+                <div class="infobox-label">Creator</div>
+                <div class="infobox-data">rudolfgods</div>
+            </div>
+        </div>
+
     </div>
-
-    <h2>История персонажа</h2>
-    <p>Здесь вы пишете любой текст о персонаже. Можно писать сколько угодно. Этот текст будет отображаться на сайте.</p>
-    
-    <h2>Способности</h2>
-    <ul>
-        <li>Суперсила</li>
-        <li>Бессмертие</li>
-        <li>Умение готовить пельмени</li>
-    </ul>
 
 </body>
 </html>
