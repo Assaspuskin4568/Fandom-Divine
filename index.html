@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divine - Wiki Profile</title>
     <style>
-        /* Общие настройки в стиле Fandom */
+        /* Фон для всего сайта */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            /* Твой фоновый рисунок */
+            background: url('background_divine.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #d5d4d5;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
         }
 
+        /* Контейнер с полупрозрачным фоном, чтобы текст не сливался с картинкой */
         .wiki-container {
             max-width: 1100px;
             margin: 0 auto;
             display: flex;
             gap: 20px;
             align-items: flex-start;
+            background-color: rgba(18, 18, 18, 0.9); /* Темный фон */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
         /* Основной контент (слева) */
@@ -42,10 +49,9 @@
             border-bottom: 1px solid #333;
             padding-bottom: 5px;
             margin-top: 30px;
-            clear: both; /* Чтобы заголовки не наезжали на картинку */
+            clear: both;
         }
 
-        /* Стиль для годов и подзаголовков в истории */
         .main-content h3 {
             font-size: 1.2em;
             color: #ffcc00;
@@ -53,11 +59,11 @@
             margin-bottom: 10px;
         }
 
-        /* Стиль для большой картинки слева */
+        /* Большая картинка слева (сдвинута чуть ниже) */
         .main-image {
             float: left;
-            width: 280px; /* Ширина картинки */
-            margin: 0 20px 15px 0;
+            width: 280px;
+            margin: 10px 20px 15px 0; /* Сдвиг вниз на 10px */
             border-radius: 5px;
             border: 1px solid #444;
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
@@ -81,6 +87,19 @@
             font-weight: bold;
             padding: 10px;
             border-bottom: 1px solid #333;
+        }
+
+        /* Блок для картинки в инфобоксе */
+        .infobox-image {
+            text-align: center;
+            padding: 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         .infobox-section-header {
@@ -113,11 +132,23 @@
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
 
+        /* Плеер с музыкой */
+        .music-player {
+            margin-bottom: 20px;
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* Адаптивность для телефонов */
         @media (max-width: 768px) {
-            .wiki-container { flex-direction: column; }
+            .wiki-container { flex-direction: column; padding: 15px; }
             .infobox { width: 100%; order: -1; }
-            .main-image { float: none; display: block; margin: 0 auto 20px auto; width: 100%; max-width: 300px; }
+            .main-image { float: none; display: block; margin: 10px auto 20px auto; width: 100%; max-width: 300px; }
         }
     </style>
 </head>
@@ -129,7 +160,16 @@
         <div class="main-content">
             <h1>Divine</h1>
             
-            <!-- Вот здесь мы добавили картинку -->
+            <!-- Музыкальный плеер -->
+            <div class="music-player">
+                <span>🎵 Theme:</span>
+                <audio controls loop>
+                    <source src=".-Divine%20SEE%20you%201-2%20layer.mp3" type="audio/mpeg">
+                    Твой браузер не поддерживает аудио.
+                </audio>
+            </div>
+
+            <!-- Картинка слева (сдвинута чуть ниже) -->
             <img src="full_height_divine.jpg" alt="Divine Full Height" class="main-image">
 
             <h2>Overview</h2>
@@ -210,6 +250,11 @@
         <!-- Правая часть (Инфобокс как на Fandom) -->
         <div class="infobox">
             <div class="infobox-title">Divine</div>
+            
+            <!-- Вот сюда мы добавили картинку, на которую ты указывал! -->
+            <div class="infobox-image">
+                <img src="full_height_divine.jpg" alt="Divine Portrait">
+            </div>
 
             <div class="infobox-section-header">Biographical Information</div>
             
