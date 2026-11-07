@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divine - Wiki Profile</title>
     <style>
-        /* Основной фон документа - спасает от белых вспышек */
-        html {
-            background-color: #121212;
-        }
+        html { background-color: #121212; }
+        * { box-sizing: border-box; }
 
-        * {
-            box-sizing: border-box;
-        }
+        /* Скрытые элементы для переключения языка */
+        .hidden { display: none !important; }
 
-        /* ФИКС ФОНА ДЛЯ МОБИЛЬНЫХ */
+        /* ФИКС ФОНА */
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0; /* inset: 0 работает лучше на Android */
+            top: 0; left: 0; right: 0; bottom: 0;
             z-index: -1;
             background-image: url('background_divine.jpg');
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
-            /* 100dvh - это динамическая высота, она учитывает исчезающую адресную строку */
             height: 100vh;
             height: 100dvh; 
         }
@@ -41,7 +34,7 @@
             padding: 20px;
             line-height: 1.6;
             overflow-x: hidden;
-            -webkit-text-size-adjust: 100%; /* Запрет на кривое масштабирование текста */
+            -webkit-text-size-adjust: 100%;
         }
 
         .wiki-container {
@@ -57,10 +50,7 @@
             width: 100%;
         }
 
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .main-content { flex: 1; min-width: 0; }
 
         .main-content h1 {
             font-size: 2.2em;
@@ -88,12 +78,42 @@
             word-wrap: break-word;
         }
 
-        /* Жесткий перенос длинных слов */
         p, li {
             overflow-wrap: anywhere;
             word-break: break-word;
         }
 
+        /* Кнопки переключения языка */
+        .lang-toggle {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0 25px 0;
+        }
+
+        .lang-btn {
+            background-color: #1e1e1e;
+            color: #b0b0b0;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-btn:hover { background-color: #333; color: #fff; }
+        .lang-btn.active {
+            background-color: #3a0000;
+            color: #ff4d4d;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        /* Инфобокс */
         .infobox {
             width: 300px;
             background-color: #1e1e1e;
@@ -148,9 +168,7 @@
             color: #b0b0b0;
         }
 
-        .infobox-data {
-            width: 60%;
-        }
+        .infobox-data { width: 60%; }
 
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
@@ -166,124 +184,157 @@
             gap: 10px;
         }
 
-        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ (OnePlus, Samsung и др.) */
         @media (max-width: 768px) {
-            body { 
-                padding: 10px; 
-            }
-            .wiki-container { 
-                flex-direction: column; 
-                padding: 15px; 
-                gap: 15px;
-                /* Растягиваем контейнер на всю ширину на телефоне */
-                align-items: stretch; 
-            }
-            .infobox { 
-                width: 100%; 
-                order: -1; 
-            }
-            
-            /* ПОЛНЫЙ ФИКС ПЛЕЕРА */
-            .music-player {
-                flex-direction: column; /* Текст над плеером */
-                align-items: flex-start;
-                width: 100%;
-                overflow: hidden; /* Обрезаем всё, что пытается вылезти */
-                padding: 10px;
-            }
-            .music-player audio {
-                width: 100%; /* Плеер строго по ширине экрана */
-                max-width: 100%;
-                display: block;
-                margin-top: 5px; /* Отступ от надписи */
-            }
-            .main-content { 
-                width: 100%; 
-            }
+            body { padding: 10px; }
+            .wiki-container { flex-direction: column; padding: 15px; gap: 15px; align-items: stretch; }
+            .infobox { width: 100%; order: -1; }
+            .music-player { flex-direction: column; align-items: flex-start; width: 100%; overflow: hidden; padding: 10px; }
+            .music-player audio { width: 100%; max-width: 100%; display: block; margin-top: 5px; }
+            .main-content { width: 100%; }
             .main-content h1 { font-size: 1.8em; }
             .main-content h2 { font-size: 1.3em; }
             ul { padding-left: 15px; }
         }
     </style>
 </head>
-<body>
+<body onload="setLang('en')">
 
     <div class="wiki-container">
         
-        <!-- Левая часть (основной текст) -->
         <div class="main-content">
             <h1>Divine</h1>
             
-            <!-- Музыкальный плеер (тема) -->
             <div class="music-player">
                 <span>🎵 Theme:</span>
                 <audio controls loop>
                     <source src="-Divine SEE you 1-2 layer.ogg" type="audio/ogg">
-                    Твой браузер не поддерживает аудио.
                 </audio>
             </div>
 
-            <!-- Плеер со смехом -->
             <div class="music-player">
                 <span>🔊 Laugh:</span>
                 <audio controls>
                     <source src="Divine_Laugh.mp3" type="audio/mpeg">
-                    Твой браузер не поддерживает аудио.
                 </audio>
             </div>
 
-            <h2>Overview</h2>
-            <p>Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
-            
-            <h2>Occupation</h2>
-            <ul>
+            <h2>
+                <span class="lang-en">Overview</span>
+                <span class="lang-ru hidden">Обзор</span>
+            </h2>
+            <p class="lang-en">Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
+            <p class="lang-ru hidden">Divine (Божественный) — персонаж, созданный <strong>rudolfgods</strong>. Истинная природа этой сущности остается загадкой, но его присутствие охватывает как внешний мир, так и игровую вселенную.</p>
+
+            <!-- Кнопки языков -->
+            <div class="lang-toggle">
+                <button id="btn-en" class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
+                <button id="btn-ru" class="lang-btn" onclick="setLang('ru')">🇷🇺 Русский</button>
+            </div>
+
+            <h2>
+                <span class="lang-en">Creation</span>
+                <span class="lang-ru hidden">Создание</span>
+            </h2>
+            <p class="lang-en">Original creator — <strong>rudolfgods</strong></p>
+            <p class="lang-ru hidden">Оригинальный создатель — <strong>rudolfgods</strong></p>
+
+            <h2>
+                <span class="lang-en">Occupation</span>
+                <span class="lang-ru hidden">Занятия</span>
+            </h2>
+            <ul class="lang-en">
                 <li>Exploring the outside world and the in-game world.</li>
                 <li>Gaining new knowledge.</li>
                 <li>Creating new game worlds and characters.</li>
                 <li>A creative approach to murder.</li>
             </ul>
+            <ul class="lang-ru hidden">
+                <li>Исследование внешнего и внутриигрового мира.</li>
+                <li>Получение новых знаний.</li>
+                <li>Создание новых игровых миров и персонажей.</li>
+                <li>Творческий подход к убийствам.</li>
+            </ul>
 
-            <h2>History & Appearance</h2>
+            <h2>
+                <span class="lang-en">History & Appearance</span>
+                <span class="lang-ru hidden">Появление</span>
+            </h2>
             
-            <h3>The 1990s - The Ritual</h3>
-            <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
-            <p>After some time, everything was prepared for the ritual, all the cultists were gathered, when the deity who was summoned by the cultists came out of the otherworldly portal, looking at everyone, they noticed how the deity looked, it was something between a devil and a man, but it seems their ritual did not go according to plan, almost all the cultists were killed by the deity, perhaps it was angry, and it was disturbed, so it killed almost everyone, and only one of the cultists was able to escape, but this was provided by the deity himself, so that fear and what was like a curse, which the cultist would pass on his message to others, could be sealed in the minds of those people who have programming abilities, and thus the deity will be able to manipulate them into creating ideal living conditions for him there, and he will find himself in the game world of the last cultist in order to start exploring the outside world from there.</p>
+            <!-- АНГЛИЙСКАЯ ИСТОРИЯ -->
+            <div class="lang-en">
+                <h3>The 1990s - The Ritual</h3>
+                <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
+                <p>After some time, everything was prepared for the ritual, all the cultists were gathered, when the deity who was summoned by the cultists came out of the otherworldly portal, looking at everyone, they noticed how the deity looked, it was something between a devil and a man, but it seems their ritual did not go according to plan, almost all the cultists were killed by the deity, perhaps it was angry, and it was disturbed, so it killed almost everyone, and only one of the cultists was able to escape, but this was provided by the deity himself, so that fear and what was like a curse, which the cultist would pass on his message to others, could be sealed in the minds of those people who have programming abilities, and thus the deity will be able to manipulate them into creating ideal living conditions for him there, and he will find himself in the game world of the last cultist in order to start exploring the outside world from there.</p>
 
-            <h3>1994 - The Game Development</h3>
-            <p>Four years have passed, a group of programmers have been able to bring the game to mind so that everything would function and the like, but the only thing that the Divine lacked was the recollecting factors that would give him the opportunity to interact with the game world, fortunately one of the programmers made a sprite that later decided to postpone as a last resort — the mouse Elianora, this character was an auxiliary, just the one that the deity was missing in the game, after launching the game, the game menu appears on the computer screen, the development team achieved their goal, or rather what controlled them, they managed to create this game, but they long ago forgot that it was not their goal initially, their memory it was partially erased.</p>
+                <h3>1994 - The Game Development</h3>
+                <p>Four years have passed, a group of programmers have been able to bring the game to mind so that everything would function and the like, but the only thing that the Divine lacked was the recollecting factors that would give him the opportunity to interact with the game world, fortunately one of the programmers made a sprite that later decided to postpone as a last resort — the mouse Elianora, this character was an auxiliary, just the one that the deity was missing in the game, after launching the game, the game menu appears on the computer screen, the development team achieved their goal, or rather what controlled them, they managed to create this game, but they long ago forgot that it was not their goal initially, their memory it was partially erased.</p>
 
-            <h3>1995 - Elianora's Happy Garden</h3>
-            <p>The release of the long-awaited game has come - [Elianora's Happy Garden]. Everyone, without exception, liked the way the character looks, the environment, and most importantly, that the character behaved as if alive, naturally many people playing this game wondered how the developers of this game managed to create such a realistic character, his behavior was almost the same from a real person, with their own feelings or ideas, to which the development team replied, "This is our main secret."</p>
+                <h3>1995 - Elianora's Happy Garden</h3>
+                <p>The release of the long-awaited game has come - [Elianora's Happy Garden]. Everyone, without exception, liked the way the character looks, the environment, and most importantly, that the character behaved as if alive, naturally many people playing this game wondered how the developers of this game managed to create such a realistic character, his behavior was almost the same from a real person, with their own feelings or ideas, to which the development team replied, "This is our main secret."</p>
 
-            <h3>1997 - The Dark Sprite</h3>
-            <p>As the number of purchases of game cartridges grew rapidly, the demand for them did not stop growing, it seems that Elianora found her way to fame, but she forgot about one thing, with whom she shares the game world — players began to notice that there was another sprite in the game, but it was dark in color, and similar to the silhouette of Elianora. Some people began to worry or even try to restart their computer, but the development team assured the players, "this is just a bug, and we will fix it soon!" The Divine didn't even worry about it, because he had already planned the next part of the plan to create his new habitat.</p>
+                <h3>1997 - The Dark Sprite</h3>
+                <p>As the number of purchases of game cartridges grew rapidly, the demand for them did not stop growing, it seems that Elianora found her way to fame, but she forgot about one thing, with whom she shares the game world — players began to notice that there was another sprite in the game, but it was dark in color, and similar to the silhouette of Elianora. Some people began to worry or even try to restart their computer, but the development team assured the players, "this is just a bug, and we will fix it soon!" The Divine didn't even worry about it, because he had already planned the next part of the plan to create his new habitat.</p>
 
-            <h3>1999 - A New Project</h3>
-            <p>For several years, programmers have been working on a new project, [Sonic the Hedgehog]. The nimble hedgehog occupied a place head and shoulders above Eleanor, and her popularity began to gradually decline in ratings, of course, the deity did not care, it was waiting for the release of a new game.</p>
+                <h3>1999 - A New Project</h3>
+                <p>For several years, programmers have been working on a new project, [Sonic the Hedgehog]. The nimble hedgehog occupied a place head and shoulders above Eleanor, and her popularity began to gradually decline in ratings, of course, the deity did not care, it was waiting for the release of a new game.</p>
 
-            <h3>2001 - Alice's Story</h3>
-            <p>Alice's parents died in a car accident when the girl was 7 years old, she was miraculously unharmed, and she was taken to an orphanage — (Children's Aid Society of New York). As an adult, Alice got a job and was able to earn a place to live, and most importantly, a computer in order to fulfill her dream of creating her own video game and becoming famous all over the world.</p>
-            <p>She had this dream the moment she got acquainted with the game [Sonic the Hedgehog], and that's when she started inventing her own universe with her own character who would save the world from villains. One sleepless night, when Alice was sitting tirelessly working on a game, and yet, tired in front of her laptop screen, the screen suddenly lit up with light, Alice shuddered falling from her chair when she noticed that the portrait of her character, which she created for the video game, Rudolph the Cat, appeared on the screen.</p>
-            <p>He quickly explains that he noticed strange things happening in the game, mobs disappeared, and empty sprite windows appeared in their places, and the color of the sky changed to black, or disappeared altogether, sometimes Rudolph felt someone behind him, and it bothered him. Alice did not know what the reason was, but soon she would find out about it, on her own experience, because after a few moments, the same deity materialized behind the cat, which looked like a darkened sprite of Rudolph's Cat.</p>
-            <p>The main character began to defend himself in order to prolong time, telling Alice that she deleted the game as soon as possible, until an unknown virus [as he thought] spread throughout the game. Alice did everything as Rudolph told her, she started deleting all possible files from the game, but when it came to Rudolph's sprites, she simply did not find them, she was too late.</p>
-            <p>The work window was automatically filled with text with a message, which for Alice would be the last in the real world — [You will be a great addition to MY game!]. After that, Alice didn't even understand what happened, she blinks sharply, and sees the surrounding apartment change to a spacious landscape of a mystical forest, as her human body changed, that she was wearing a pale red dress, and only then did the realization come to her mind, she got into one of her characters who were previously created for the game, but now SHE is the main character here.</p>
-            <p>Alice turns around and sees the same Cat Rudolf hovering over her, but his eyes were more anxious, his smile was wide, his pupils slightly oblique, and then it darkens in Alice's eyes, now it was clear where Rudolf's sprites had gone, and the creature stole them to put on his empty flesh, and become one with a game world that now belongs only to him, just like Alice herself, as his "friend".</p>
+                <h3>2001 - Alice's Story</h3>
+                <p>Alice's parents died in a car accident when the girl was 7 years old, she was miraculously unharmed, and she was taken to an orphanage — (Children's Aid Society of New York). As an adult, Alice got a job and was able to earn a place to live, and most importantly, a computer in order to fulfill her dream of creating her own video game and becoming famous all over the world.</p>
+                <p>She had this dream the moment she got acquainted with the game [Sonic the Hedgehog], and that's when she started inventing her own universe with her own character who would save the world from villains. One sleepless night, when Alice was sitting tirelessly working on a game, and yet, tired in front of her laptop screen, the screen suddenly lit up with light, Alice shuddered falling from her chair when she noticed that the portrait of her character, which she created for the video game, Rudolph the Cat, appeared on the screen.</p>
+                <p>He quickly explains that he noticed strange things happening in the game, mobs disappeared, and empty sprite windows appeared in their places, and the color of the sky changed to black, or disappeared altogether, sometimes Rudolph felt someone behind him, and it bothered him. Alice did not know what the reason was, but soon she would find out about it, on her own experience, because after a few moments, the same deity materialized behind the cat, which looked like a darkened sprite of Rudolph's Cat.</p>
+                <p>The main character began to defend himself in order to prolong time, telling Alice that she deleted the game as soon as possible, until an unknown virus [as he thought] spread throughout the game. Alice did everything as Rudolph told her, she started deleting all possible files from the game, but when it came to Rudolph's sprites, she simply did not find them, she was too late.</p>
+                <p>The work window was automatically filled with text with a message, which for Alice would be the last in the real world — [You will be a great addition to MY game!]. After that, Alice didn't even understand what happened, she blinks sharply, and sees the surrounding apartment change to a spacious landscape of a mystical forest, as her human body changed, that she was wearing a pale red dress, and only then did the realization come to her mind, she got into one of her characters who were previously created for the game, but now SHE is the main character here.</p>
+                <p>Alice turns around and sees the same Cat Rudolf hovering over her, but his eyes were more anxious, his smile was wide, his pupils slightly oblique, and then it darkens in Alice's eyes, now it was clear where Rudolf's sprites had gone, and the creature stole them to put on his empty flesh, and become one with a game world that now belongs only to him, just like Alice herself, as his "friend".</p>
 
-            <h3>2003 - The Disappearance</h3>
-            <p>Alice's neighbors haven't heard from the girl for too long, they decided to check if she was okay, but when they entered the apartment, they found that it was empty. The neighbors reported the girl missing, no traces were found at the place of the disappearance, everything was clean and intact in her apartment, even the computer that the investigators launched in the hope of finding at least some clues, video or audio messages did not help, but the video game [The Great Adventure of Rudolf the Cat] remained on the desktop, treacherously exposed. No one else will know what really happened to the lonely girl.</p>
+                <h3>2003 - The Disappearance</h3>
+                <p>Alice's neighbors haven't heard from the girl for too long, they decided to check if she was okay, but when they entered the apartment, they found that it was empty. The neighbors reported the girl missing, no traces were found at the place of the disappearance, everything was clean and intact in her apartment, even the computer that the investigators launched in the hope of finding at least some clues, video or audio messages did not help, but the video game [The Great Adventure of Rudolf the Cat] remained on the desktop, treacherously exposed. No one else will know what really happened to the lonely girl.</p>
 
-            <h3>Our Time</h3>
-            <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
+                <h3>Our Time</h3>
+                <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
+            </div>
 
-            <h2>Physical Description</h2>
-            <p>Divine possesses a striking appearance. Their coat color is brownish-scarlet, making them stand out in their environment. Their eyes are completely black, but their pupils turn white when they become enraged.</p>
-            <ul>
+            <!-- РУССКАЯ ИСТОРИЯ (из ПОЯВЛЕНИЕ.txt) -->
+            <div class="lang-ru hidden">
+                <h3>1990-е годы - Ритуал</h3>
+                <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
+                <p>Через некоторое время все было подготовлено к ритуалу, все культисты собрались, когда божество, которое было вызвано культистами, вышло из потустороннего портала, посмотрев на всех, они заметили, как выглядело божество, это было что-то среднее между дьяволом и человеком, но, похоже, их ритуал сработал. все пошло не по плану, почти все культисты были убиты божеством, возможно, оно было разгневано, и его потревожили, поэтому оно убило почти всех, и только один из культистов смог спастись, но это было предусмотрено самим божеством, так что страх и то, что было похоже на проклятие, которое культист передал бы в своем послании другим, могло бы быть запечатлено в сознании тех людей, которые обладают способностями к программированию, и таким образом божество смогло бы манипулировать ими, чтобы создать для него там идеальные условия жизни, и он оказался бы в игровом мире последнего культиста, чтобы оттуда начать знакомство с внешним миром.</p>
+
+                <h3>1994 - Разработка игры</h3>
+                <p>Прошло четыре года, группа программистов смогла довести игру до ума, чтобы все функционировало и тому подобное, но единственное, чего не хватало Божественному, - это запоминающих факторов, которые дали бы ему возможность взаимодействовать с игровым миром, к счастью, один из программистов создал спрайт то, что позже решили отложить на крайний случай — мышь Элианора, этот персонаж был вспомогательным, как раз тем, которого божеству не хватало в игре, после запуска игры на экране компьютера появляется игровое меню, команда разработчиков достигла своей цели, вернее того, что управляло ими, они удалось создать эту игру, но они давно забыли, что изначально это не было их целью, в их памяти это было частично стерто.</p>
+
+                <h3>1995-е годы - Релиз</h3>
+                <p>Наступил релиз долгожданной игры — [Elianora's Happy Garden] всем без исключения понравилось, как выглядит персонаж, окружающая среда, а главное, что персонаж вел себя как живой, естественно, многие люди, игравшие в эту игру, задавались вопросом, как разработчикам этой игры удалось создать такой реалистичный персонаж, его поведение было почти таким же, как у реального человека, с его собственными чувствами или идеями, на что команда разработчиков ответила: "Это наш главный секрет".</p>
+
+                <h3>1997-е годы - Темный спрайт</h3>
+                <p>Поскольку количество покупок игровых картриджей стремительно росло, спрос на них не переставал расти, похоже, Элианора нашла свой путь к славе, но забыла об одном, с кем она делит игровой мир — игроки стали замечать, что в игре появился еще один спрайт, но это не так. был темного цвета и похож на силуэт Элианоры, некоторые люди начали беспокоиться или даже пытаться перезагрузить свой компьютер, но команда разработчиков заверила игроков: "Это всего лишь ошибка, и мы скоро ее исправим!" Божественный даже не беспокоился об этом, потому что он уже спланировал следующую часть плана по созданию своей новой среды обитания.</p>
+
+                <h3>1999 - Новый проект</h3>
+                <p>В течение нескольких лет программисты работали над новым проектом [Sonic the hedgehog]. Шустрый ежик занял место на голову выше Элеоноры, и ее популярность в рейтингах начала постепенно снижаться, конечно, божество это не волновало, оно ждало выхода новой игры.</p>
+
+                <h3>2001-е - История Алисы</h3>
+                <p>Родители Алисы погибли в автокатастрофе, когда девочке было 7 лет, она чудом не пострадала и была доставлена в детский дом — (Общество помощи детям Нью-Йорка). Став взрослой, Алиса устроилась на работу и смогла заработать на жилье, а главное, на компьютер, чтобы осуществить свою мечту - создать собственную видеоигру и прославиться на весь мир.</p>
+            </div>
+
+            <h2>
+                <span class="lang-en">Physical Description</span>
+                <span class="lang-ru hidden">Описание внешности</span>
+            </h2>
+            <p class="lang-en">Divine possesses a striking appearance. Their coat color is brownish-scarlet, making them stand out in their environment. Their eyes are completely black, but their pupils turn white when they become enraged.</p>
+            <p class="lang-ru hidden">Божественный обладает яркой внешностью. Окрас его шерсти коричневато-алый, что выделяет его в окружающей среде. Его глаза полностью черные, но зрачки становятся белыми, когда он приходит в ярость.</p>
+            <ul class="lang-en">
                 <li><strong>Height:</strong> 1 ' 70 cm</li>
                 <li><strong>Weight:</strong> 50 kg.</li>
             </ul>
+            <ul class="lang-ru hidden">
+                <li><strong>Рост:</strong> 1,70 см.</li>
+                <li><strong>Вес:</strong> 50 кг.</li>
+            </ul>
 
-            <h2>Abilities</h2>
-            <ul>
+            <h2>
+                <span class="lang-en">Abilities</span>
+                <span class="lang-ru hidden">Способности</span>
+            </h2>
+            <ul class="lang-en">
                 <li><strong>Pumping:</strong> The Divine has a cursed aura, which makes it impossible to physically stay close to him for a long time, in which case, the victim will feel hallucinations, bloody coughing and seizures of epilepsy. Divine is extremely fast and hardy, he plays the role of "Stalking and attacking mentally" before moving into another phase of his violent abilities.</li>
                 <li><strong>Manipulation and distortion of reality:</strong> Only one encounter is enough for the Divine to remember the face of his victim, learn her fears, desires, and then begin to manipulate even when the victim is far from him, which means that the Divine has a very well-developed manipulative system and is intelligent in this.</li>
                 <li><strong>High strength and speed:</strong> The Divine can easily catch up with the victim if desired, but in most cases he plays with her before brutally killing her, proving that one cannot run away, fly away, or hide from him.</li>
@@ -291,9 +342,20 @@
                 <li><strong>Flight and teleportation:</strong> His instincts will always lead to the victim before they overtake.</li>
                 <li><strong>Immortality and regeneration:</strong> Even if the victim tries to resist the Divine, he will fail, if he tries to damage his vessel, the Divine will only provoke aggression and a desire to get to the victim before being punished in cruel ways.</li>
             </ul>
+            <ul class="lang-ru hidden">
+                <li><strong>Нагнетание:</strong> У Божественного проклятая аура, из-за которой физически невозможно находиться рядом с ним долгое время, и в этом случае жертва будет испытывать галлюцинации, кровавый кашель и приступы эпилепсии. Божественный чрезвычайно быстр и вынослив, он играет роль "Выслеживающего и атакующего мысленно", прежде чем перейти к другой фазе проявления своих жестоких способностей.</li>
+                <li><strong>Манипуляция и искажение реальности:</strong> Достаточно всего одной встречи, чтобы Божественный запомнил лицо своей жертвы, узнал ее страхи, желания, а затем начал манипулировать, даже когда жертва находится далеко от него, что означает, что Божественный обладает очень хорошо развитой манипулятивной системой и в этом разумен.</li>
+                <li><strong>Высокая сила и скорость:</strong> При желании Божественный может легко догнать жертву, но в большинстве случаев он играет с ней, прежде чем жестоко убить, доказывая, что от него невозможно убежать, улететь или спрятаться.</li>
+                <li><strong>Метаморфоза:</strong> Принимает различные формы, и вот важная деталь, он может делать это как для устрашения жертвы, так и для того, чтобы свести ее с ума, принимая образы близких жертвы, таким образом, Божественный безжалостен и не отвечает на мольбы.</li>
+                <li><strong>Полет и телепортация:</strong> Его инстинкты всегда приведут к жертве прежде, чем она настигнет его.</li>
+                <li><strong>Бессмертие и регенерация:</strong> Даже если жертва попытается противостоять Божественному, у нее ничего не получится, если он попытается повредить свой сосуд, Божественного только спровоцирует агрессия и желание добраться до жертвы, прежде чем ее жестоко накажут.</li>
+            </ul>
 
-            <h2>Interesting Facts</h2>
-            <ul>
+            <h2>
+                <span class="lang-en">Interesting Facts</span>
+                <span class="lang-ru hidden">Интересные факты</span>
+            </h2>
+            <ul class="lang-en">
                 <li>The Divine is ALWAYS smiling, this is due to the fact that his image is literally cursed, oh he must be a cruel tyrant and manipulator who knows no boundaries.</li>
                 <li>The Divine, despite all his cruel image, still knows how to show elegant gestures, but these are extremely rare cases if he likes the victim.</li>
                 <li>The Divine did not kidnap Rudolf's Cat, as in the original Sonic kripipasta. Yeah, he just recreated an image from memory that turned out to be different from what he originally intended.</li>
@@ -304,10 +366,21 @@
                 <li>Divine likes to arrange tea parties with Alice.</li>
                 <li>The Divine really has a heart (as an internal organ).</li>
             </ul>
+            <ul class="lang-ru hidden">
+                <li>Божественный ВСЕГДА улыбается, это связано с тем, что его образ буквально проклят, он должен быть жестоким тираном и манипулятором, не знающим границ.</li>
+                <li>Божественный, несмотря на весь свой жестокий образ, все же умеет проявлять изящные жесты, но это крайне редкие случаи, если ему нравится жертва.</li>
+                <li>Божественный не похищал Кота Рудольфа, как в оригинальной крипипасте про Соника. Ага, он просто воссоздал образ по памяти, который оказался не таким, как он изначально задумывал.</li>
+                <li>Несмотря на то, что он затащил Алису в игру просто как данность, он все еще проявляет к ней любопытство, все еще не до конца понимая, как она еще не сошла с ума (как Алиса из ПК-порта).</li>
+                <li>Алиса во вселенной Божественного никак не связана с Алисой из ПК-порта, хотя их истории несколько похожи.</li>
+                <li>Он считает себя выше Бога и Сатаны одновременно.</li>
+                <li>Божественный любит сырое мясо, если он не ест мясо, он будет в плохом настроении.</li>
+                <li>Божественный любит устраивать чаепития с Алисой.</li>
+                <li>У Божественного действительно есть сердце (как внутренний орган).</li>
+            </ul>
 
         </div>
 
-        <!-- Правая часть (Инфобокс как на Fandom) -->
+        <!-- Правая часть (Инфобокс) -->
         <div class="infobox">
             <div class="infobox-title">Divine</div>
             
@@ -315,53 +388,133 @@
                 <img src="full_height_divine.jpg" alt="Divine Portrait">
             </div>
 
-            <div class="infobox-section-header">Biographical Information</div>
-            
-            <div class="infobox-row">
-                <div class="infobox-label">Gender</div>
-                <div class="infobox-data">Male</div>
+            <div class="infobox-section-header">
+                <span class="lang-en">Biographical Information</span>
+                <span class="lang-ru hidden">Биографические данные</span>
             </div>
             
             <div class="infobox-row">
-                <div class="infobox-label">Pseudonyms</div>
-                <div class="infobox-data">God, Deity, All-seeing, A Living nightmare</div>
+                <div class="infobox-label">
+                    <span class="lang-en">Gender</span>
+                    <span class="lang-ru hidden">Пол</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">Male</span>
+                    <span class="lang-ru hidden">Мужской</span>
+                </div>
             </div>
             
             <div class="infobox-row">
-                <div class="infobox-label">The type is</div>
-                <div class="infobox-data">Unknown</div>
+                <div class="infobox-label">
+                    <span class="lang-en">Pseudonyms</span>
+                    <span class="lang-ru hidden">Псевдонимы</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">God, Deity, All-seeing, A Living nightmare</span>
+                    <span class="lang-ru hidden">Бог, Божество, Всевидящий, Оживший кошмар</span>
+                </div>
+            </div>
+            
+            <div class="infobox-row">
+                <div class="infobox-label">
+                    <span class="lang-en">The type is</span>
+                    <span class="lang-ru hidden">Тип</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">Unknown</span>
+                    <span class="lang-ru hidden">Неизвестен</span>
+                </div>
             </div>
 
-            <div class="infobox-section-header">Physical Description</div>
-            
-            <div class="infobox-row">
-                <div class="infobox-label">Height</div>
-                <div class="infobox-data">1 ' 70 cm</div>
-            </div>
-
-            <div class="infobox-row">
-                <div class="infobox-label">Weight</div>
-                <div class="infobox-data">50 kg</div>
-            </div>
-
-            <div class="infobox-row">
-                <div class="infobox-label">Coat color</div>
-                <div class="infobox-data">Brownish-scarlet</div>
-            </div>
-
-            <div class="infobox-row">
-                <div class="infobox-label">Eye color</div>
-                <div class="infobox-data">Black / white pupils (when enraged)</div>
+            <div class="infobox-section-header">
+                <span class="lang-en">Physical Description</span>
+                <span class="lang-ru hidden">Описание внешности</span>
             </div>
             
-            <div class="infobox-section-header">Creation</div>
             <div class="infobox-row">
-                <div class="infobox-label">Creator</div>
-                <div class="infobox-data">rudolfgods</div>
+                <div class="infobox-label">
+                    <span class="lang-en">Height</span>
+                    <span class="lang-ru hidden">Рост</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">1 ' 70 cm</span>
+                    <span class="lang-ru hidden">1,70 см</span>
+                </div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">
+                    <span class="lang-en">Weight</span>
+                    <span class="lang-ru hidden">Вес</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">50 kg</span>
+                    <span class="lang-ru hidden">50 кг</span>
+                </div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">
+                    <span class="lang-en">Coat color</span>
+                    <span class="lang-ru hidden">Окрас шерсти</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">Brownish-scarlet</span>
+                    <span class="lang-ru hidden">Коричневато-алый</span>
+                </div>
+            </div>
+
+            <div class="infobox-row">
+                <div class="infobox-label">
+                    <span class="lang-en">Eye color</span>
+                    <span class="lang-ru hidden">Цвет глаз</span>
+                </div>
+                <div class="infobox-data">
+                    <span class="lang-en">Black / white pupils (when enraged)</span>
+                    <span class="lang-ru hidden">Черные / белые зрачки (в ярости)</span>
+                </div>
+            </div>
+            
+            <div class="infobox-section-header">
+                <span class="lang-en">Creation</span>
+                <span class="lang-ru hidden">Создание</span>
+            </div>
+            <div class="infobox-row">
+                <div class="infobox-label">
+                    <span class="lang-en">Creator</span>
+                    <span class="lang-ru hidden">Создатель</span>
+                </div>
+                <div class="infobox-data">
+                    rudolfgods
+                </div>
             </div>
         </div>
 
     </div>
 
+    <!-- Скрипт переключения языков -->
+    <script>
+        function setLang(lang) {
+            // Находим все элементы с классами lang-en и lang-ru
+            const enElements = document.querySelectorAll('.lang-en');
+            const ruElements = document.querySelectorAll('.lang-ru');
+            const btnEn = document.getElementById('btn-en');
+            const btnRu = document.getElementById('btn-ru');
+
+            if (lang === 'en') {
+                // Показываем английский, скрываем русский
+                enElements.forEach(el => el.classList.remove('hidden'));
+                ruElements.forEach(el => el.classList.add('hidden'));
+                btnEn.classList.add('active');
+                btnRu.classList.remove('active');
+            } else {
+                // Показываем русский, скрываем английский
+                enElements.forEach(el => el.classList.add('hidden'));
+                ruElements.forEach(el => el.classList.remove('hidden'));
+                btnRu.classList.add('active');
+                btnEn.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
