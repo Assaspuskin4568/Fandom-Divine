@@ -225,10 +225,14 @@
             <p class="lang-en">Divine is a character created by <strong>rudolfgods</strong>. The true nature of this entity remains a mystery, but their presence spans both the outside world and the in-game universe.</p>
             <p class="lang-ru hidden">Divine (Божественный) — персонаж, созданный <strong>rudolfgods</strong>. Истинная природа этой сущности остается загадкой, но его присутствие охватывает как внешний мир, так и игровую вселенную.</p>
 
-            <!-- Кнопки языков -->
+            <!-- Кнопки языков с картинками флагов -->
             <div class="lang-toggle">
-                <button id="btn-en" class="lang-btn active" onclick="setLang('en')">🇺🇸 English</button>
-                <button id="btn-ru" class="lang-btn" onclick="setLang('ru')">🇷🇺 Русский</button>
+                <button id="btn-en" class="lang-btn active" onclick="setLang('en')">
+                    <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; height: auto; border-radius: 2px;"> English
+                </button>
+                <button id="btn-ru" class="lang-btn" onclick="setLang('ru')">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="RU" style="width: 20px; height: auto; border-radius: 2px;"> Русский
+                </button>
             </div>
 
             <h2>
@@ -293,7 +297,7 @@
                 <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
             </div>
 
-            <!-- РУССКАЯ ИСТОРИЯ (из ПОЯВЛЕНИЕ.txt) -->
+            <!-- РУССКАЯ ИСТОРИЯ -->
             <div class="lang-ru hidden">
                 <h3>1990-е годы - Ритуал</h3>
                 <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
@@ -492,23 +496,19 @@
 
     </div>
 
-    <!-- Скрипт переключения языков -->
     <script>
         function setLang(lang) {
-            // Находим все элементы с классами lang-en и lang-ru
             const enElements = document.querySelectorAll('.lang-en');
             const ruElements = document.querySelectorAll('.lang-ru');
             const btnEn = document.getElementById('btn-en');
             const btnRu = document.getElementById('btn-ru');
 
             if (lang === 'en') {
-                // Показываем английский, скрываем русский
                 enElements.forEach(el => el.classList.remove('hidden'));
                 ruElements.forEach(el => el.classList.add('hidden'));
                 btnEn.classList.add('active');
                 btnRu.classList.remove('active');
             } else {
-                // Показываем русский, скрываем английский
                 enElements.forEach(el => el.classList.add('hidden'));
                 ruElements.forEach(el => el.classList.remove('hidden'));
                 btnRu.classList.add('active');
