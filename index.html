@@ -193,6 +193,53 @@
             text-shadow: 0 0 5px #ff0000;
         }
 
+        /* СТИЛИ ДЛЯ НАВИГАЦИИ ПО ПЕРСОНАЖАМ */
+        .other-characters-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 10px;
+            justify-content: center;
+        }
+
+        .character-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #b0b0b0;
+            transition: transform 0.2s, color 0.2s;
+            width: 80px;
+        }
+
+        .character-link:hover {
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+
+        .character-link img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            object-position: top; /* Чтобы лицо было в фокусе */
+            border-radius: 50%; /* Круглые аватарки */
+            border: 2px solid #444;
+            margin-bottom: 6px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .character-link:hover img {
+            border-color: #ff4d4d;
+            box-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+
+        .character-link span {
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
 
@@ -258,7 +305,6 @@
             -webkit-user-drag: none;
         }
 
-        /* ОБНОВЛЕННЫЙ ВОДЯНОЙ ЗНАК */
         .watermark {
             position: absolute;
             bottom: 15px;
@@ -268,8 +314,8 @@
         }
 
         .watermark img {
-            width: 140px; /* Размер водяного знака */
-            opacity: 0.6; /* Прозрачность, чтобы не перекрывать арт */
+            width: 140px;
+            opacity: 0.6;
             height: auto;
             filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.8));
         }
@@ -329,7 +375,6 @@
             .next { right: 5px; }
             .close-btn { top: 10px; right: 15px; font-size: 35px; }
             
-            /* Уменьшаем водяной знак на телефонах */
             .watermark img {
                 width: 90px;
             }
@@ -686,6 +731,22 @@
                 </div>
                 <div class="infobox-data"><a href="https://t.me/rudaEZka" target="_blank">Channel</a></div>
             </div>
+
+            <div class="infobox-section-header">
+                <span class="lang-en">Other Characters</span>
+                <span class="lang-ru hidden">Другие персонажи</span>
+            </div>
+            <div class="other-characters-grid">
+                <a href="#" class="character-link" title="Divine (Current)">
+                    <img src="assets/full_height_divine.jpg" alt="Divine">
+                    <span>Divine</span>
+                </a>
+                <a href="#" class="character-link" title="Alice">
+                    <img src="assets/Alice and the Divine.png" alt="Alice" style="object-position: top;">
+                    <span>Alice</span>
+                </a>
+            </div>
+
         </div>
 
     </div>
@@ -695,7 +756,6 @@
         <div class="lightbox-content">
             <button class="nav-btn prev" onclick="changeImage(-1, event)">&#10094;</button>
             
-            <!-- ИЗОБРАЖЕНИЕ ВОДЯНОГО ЗНАКА -->
             <div class="watermark"><img src="assets/ruda_watermark.png" alt="Watermark" draggable="false"></div>
             
             <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Image" draggable="false">
