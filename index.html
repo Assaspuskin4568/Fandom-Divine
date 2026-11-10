@@ -37,7 +37,7 @@
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
             
-            /* Защита от выделения */
+            /* Защита от выделения текста и картинок */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -239,7 +239,7 @@
             font-size: 24px;
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            pointer-events: none; /* Чтобы клики проходили сквозь него */
+            pointer-events: none;
             z-index: 1002;
         }
 
@@ -376,8 +376,8 @@
                 <img src="assets/Cream Revenge (a joke).png" alt="Cream Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)" draggable="false">
                 <img src="assets/Divine kills Cream.png" alt="Divine kills Cream" class="gallery-item" onclick="openLightbox(2)" draggable="false">
                 <img src="assets/Divine kills Cream2.png" alt="Divine kills Cream2" class="gallery-item" onclick="openLightbox(3)" draggable="false">
-                <!-- Возвращаем .jpg, так как в консоли была ошибка .png -->
-                <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)" draggable="false">
+                <!-- Добавлен onerror, чтобы скрыть битую картинку, если имя файла не совпадает -->
+                <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)" draggable="false" onerror="this.style.display='none'">
                 <img src="assets/Reference sheet — Divine.png" alt="Reference sheet — Divine" class="gallery-item" onclick="openLightbox(5)" draggable="false">
                 <img src="assets/The divine being looks at you with curiosity..png" alt="The divine being looks at you with curiosity." class="gallery-item" onclick="openLightbox(6)" draggable="false">
                 <img src="assets/The first meeting with Alice.png" alt="The first meeting with Alice" class="gallery-item" onclick="openLightbox(7)" draggable="false">
@@ -637,7 +637,7 @@
         <div class="lightbox-content">
             <button class="nav-btn prev" onclick="changeImage(-1, event)">&#10094;</button>
             
-            <!-- ДОБАВЛЕН ВОДЯНОЙ ЗНАК -->
+            <!-- ВОДЯНОЙ ЗНАК -->
             <div class="watermark">© rudolfgods</div>
             
             <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Image" draggable="false">
@@ -653,7 +653,6 @@
             { src: "assets/Cream Revenge (a joke).png", title_en: "Cream Revenge (a joke)", title_ru: "Месть Крим (шутка)" },
             { src: "assets/Divine kills Cream.png", title_en: "Divine kills Cream", title_ru: "Божественный убивает Крим" },
             { src: "assets/Divine kills Cream2.png", title_en: "Divine kills Cream2", title_ru: "Божественный убивает Крим 2" },
-            /* Возвращено на .jpg из-за ошибки в консоли */
             { src: "assets/ldk.jpg", title_en: "ldk", title_ru: "ldk" }, 
             { src: "assets/Reference sheet — Divine.png", title_en: "Reference sheet — Divine", title_ru: "Референс — Божественный" },
             { src: "assets/The divine being looks at you with curiosity..png", title_en: "The divine being looks at you with curiosity.", title_ru: "Божественное существо с любопытством смотрит на тебя" },
@@ -724,20 +723,25 @@
             }
         }
 
-        // Защита (ПКМ и драг)
+        // ==========================================
+        // УСИЛЕННАЯ ЗАЩИТА ОТ КОПИРОВАНИЯ И DEVTOOLS
+        // ==========================================
+
+        // 1. Блокировка контекстного меню по всей странице (ПКМ)
         document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                alert('Копирование и скачивание изображений запрещено автором!');
-            }
+            e.preventDefault();
+            // Раскомментируй строку ниже, если хочешь, чтобы выскакивало окно
+            // alert('Копирование и скачивание запрещено автором!');
         });
 
+        // 2. Запрет перетаскивания (Drag & Drop)
         document.addEventListener('dragstart', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
+        // 3. Защита от PrintScreen
         document.addEventListener('keyup', function(e) {
             if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
                 if (navigator.clipboard) {
@@ -750,12 +754,51 @@
             }
         });
 
+        // 4. Блокировка горячих клавиш DevTools
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || e.code === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's')) {
+            // F12
+            if (e.key === 'F12' || e.code === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I / J / C (Инструменты разработчика)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Cmd+Opt+I (для Mac)
+            if (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (Посмотреть код)
+            if ((e.ctrlKey && e.key === 'u') || (e.metaKey && e.key === 'u')) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+S (Сохранить страницу)
+            if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
                 e.preventDefault();
                 return false;
             }
         });
+
+        // 5. Дополнительная защита от открытия консоли через меню браузера
+        // Этот скрипт проверяет, изменился ли размер окна (иногда так открывают консоль)
+        let devtoolsOpen = false;
+        const element = new Image();
+        Object.defineProperty(element, 'id', {
+            get: function() {
+                devtoolsOpen = true;
+                // Можно добавить редирект или скрытие контента
+                // document.body.innerHTML = "<h1>Доступ запрещен!</h1>";
+            }
+        });
+        setInterval(function() {
+            devtoolsOpen = false;
+            console.dir(element); // Если консоль открыта, сработает getter
+        }, 1000);
+
     </script>
 </body>
 </html>
