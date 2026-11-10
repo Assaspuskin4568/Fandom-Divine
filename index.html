@@ -292,7 +292,6 @@
             <div class="music-player">
                 <span class="lang-en">🎵 Theme:</span>
                 <span class="lang-ru hidden">🎵 Тема:</span>
-                <!-- ИСПРАВЛЕНО: sounds/ -->
                 <audio controls loop>
                     <source src="sounds/-Divine SEE you 1-2 layer.ogg" type="audio/ogg">
                 </audio>
@@ -301,7 +300,6 @@
             <div class="music-player">
                 <span class="lang-en">🔊 Laugh:</span>
                 <span class="lang-ru hidden">🔊 Смех:</span>
-                <!-- ИСПРАВЛЕНО: sounds/ -->
                 <audio controls>
                     <source src="sounds/Divine_Laugh.mp3" type="audio/mpeg">
                 </audio>
@@ -353,10 +351,10 @@
             </h2>
             <div class="gallery-grid">
                 <img src="assets/Alice and the Divine.png" alt="Alice and the Divine" class="gallery-item" onclick="openLightbox(0)">
-                <!-- ИСПРАВЛЕНО: Убрал апостроф в имени файла -->
                 <img src="assets/Cream Revenge (a joke).png" alt="Cream Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)">
                 <img src="assets/Divine kills Cream.png" alt="Divine kills Cream" class="gallery-item" onclick="openLightbox(2)">
                 <img src="assets/Divine kills Cream2.png" alt="Divine kills Cream2" class="gallery-item" onclick="openLightbox(3)">
+                <!-- ldk теперь строго с маленькой буквы, как на GitHub -->
                 <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)">
                 <img src="assets/Reference sheet — Divine.png" alt="Reference sheet — Divine" class="gallery-item" onclick="openLightbox(5)">
                 <img src="assets/The divine being looks at you with curiosity..png" alt="The divine being looks at you with curiosity." class="gallery-item" onclick="openLightbox(6)">
@@ -369,6 +367,7 @@
                 <span class="lang-ru hidden">Появление</span>
             </h2>
             
+            <!-- АНГЛИЙСКАЯ ИСТОРИЯ -->
             <div class="lang-en">
                 <h3>The 1990s - The Ritual</h3>
                 <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
@@ -401,6 +400,7 @@
                 <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
             </div>
 
+            <!-- РУССКАЯ ИСТОРИЯ -->
             <div class="lang-ru hidden">
                 <h3>1990-е годы - Ритуал</h3>
                 <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
@@ -623,20 +623,21 @@
     </div>
 
     <script>
-        // Массив с картинками (ИСПРАВЛЕНО название Cream Revenge)
+        // Массив с картинками, теперь с переводами для названий
         const galleryImages = [
-            { src: "assets/Alice and the Divine.png", title: "Alice and the Divine" },
-            { src: "assets/Cream Revenge (a joke).png", title: "Cream Revenge (a joke)" },
-            { src: "assets/Divine kills Cream.png", title: "Divine kills Cream" },
-            { src: "assets/Divine kills Cream2.png", title: "Divine kills Cream2" },
-            { src: "assets/ldk.jpg", title: "ldk" },
-            { src: "assets/Reference sheet — Divine.png", title: "Reference sheet — Divine" },
-            { src: "assets/The divine being looks at you with curiosity..png", title: "The divine being looks at you with curiosity." },
-            { src: "assets/The first meeting with Alice.png", title: "The first meeting with Alice" },
-            { src: "assets/The first meeting with Alice2.png", title: "The first meeting with Alice2" }
+            { src: "assets/Alice and the Divine.png", title_en: "Alice and the Divine", title_ru: "Алиса и Божественный" },
+            { src: "assets/Cream Revenge (a joke).png", title_en: "Cream Revenge (a joke)", title_ru: "Месть Крим (шутка)" },
+            { src: "assets/Divine kills Cream.png", title_en: "Divine kills Cream", title_ru: "Божественный убивает Крим" },
+            { src: "assets/Divine kills Cream2.png", title_en: "Divine kills Cream2", title_ru: "Божественный убивает Крим 2" },
+            { src: "assets/ldk.jpg", title_en: "ldk", title_ru: "ldk" },
+            { src: "assets/Reference sheet — Divine.png", title_en: "Reference sheet — Divine", title_ru: "Референс — Божественный" },
+            { src: "assets/The divine being looks at you with curiosity..png", title_en: "The divine being looks at you with curiosity.", title_ru: "Божественное существо с любопытством смотрит на тебя" },
+            { src: "assets/The first meeting with Alice.png", title_en: "The first meeting with Alice", title_ru: "Первая встреча с Алисой" },
+            { src: "assets/The first meeting with Alice2.png", title_en: "The first meeting with Alice2", title_ru: "Первая встреча с Алисой 2" }
         ];
 
         let currentImgIndex = 0;
+        let currentLang = 'en'; // Храним текущий язык
 
         function openLightbox(index) {
             currentImgIndex = index;
@@ -658,12 +659,15 @@
             updateLightbox();
         }
 
+        // Обновление картинки и текста с учетом языка
         function updateLightbox() {
             const imgElement = document.getElementById('lightbox-img');
             const captionElement = document.getElementById('lightbox-caption');
+            const imgData = galleryImages[currentImgIndex];
             
-            imgElement.src = galleryImages[currentImgIndex].src;
-            captionElement.textContent = galleryImages[currentImgIndex].title;
+            imgElement.src = imgData.src;
+            // Выбираем язык для подписи
+            captionElement.textContent = currentLang === 'en' ? imgData.title_en : imgData.title_ru;
         }
 
         document.getElementById('lightbox').addEventListener('click', function(e) {
@@ -673,6 +677,8 @@
         });
 
         function setLang(lang) {
+            currentLang = lang; // Обновляем текущий язык
+            
             const enElements = document.querySelectorAll('.lang-en');
             const ruElements = document.querySelectorAll('.lang-ru');
             const btnEn = document.getElementById('btn-en');
@@ -688,6 +694,11 @@
                 ruElements.forEach(el => el.classList.remove('hidden'));
                 btnRu.classList.add('active');
                 btnEn.classList.remove('active');
+            }
+
+            // Если окно с картинкой открыто, обновляем подпись на лету
+            if (!document.getElementById('lightbox').classList.contains('hidden')) {
+                updateLightbox();
             }
         }
     </script>
