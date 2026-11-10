@@ -37,7 +37,7 @@
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
             
-            /* ЗАЩИТА ОТ ВЫДЕЛЕНИЯ ТЕКСТА И КАРТИНОК */
+            /* Защита от выделения */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -177,7 +177,7 @@
             gap: 10px;
         }
 
-        /* СТИЛИ ДЛЯ ГАЛЕРЕИ */
+        /* ГАЛЕРЕЯ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -193,12 +193,7 @@
             cursor: pointer;
             border: 1px solid #333;
             transition: transform 0.2s, box-shadow 0.2s;
-            /* ЗАЩИТА ОТ ПЕРЕТАСКИВАНИЯ */
             -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-            user-drag: none;
         }
 
         .gallery-item:hover {
@@ -206,7 +201,7 @@
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
-        /* СТИЛИ ДЛЯ ЛАЙТБОКСА */
+        /* ЛАЙТБОКС (ОКНО ПРОСМОТРА) */
         .lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -233,6 +228,19 @@
             border-radius: 5px;
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
             -webkit-user-drag: none;
+        }
+
+        /* ВОДЯНОЙ ЗНАК */
+        .watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            pointer-events: none; /* Чтобы клики проходили сквозь него */
+            z-index: 1002;
         }
 
         .lightbox-caption {
@@ -289,6 +297,7 @@
             .prev { left: 5px; }
             .next { right: 5px; }
             .close-btn { top: 10px; right: 15px; font-size: 35px; }
+            .watermark { font-size: 16px; bottom: 10px; right: 10px; }
         }
     </style>
 </head>
@@ -363,13 +372,12 @@
                 <span class="lang-ru hidden">Галерея</span>
             </h2>
             <div class="gallery-grid">
-                <!-- Добавил draggable="false" ко всем картинкам -->
                 <img src="assets/Alice and the Divine.png" alt="Alice and the Divine" class="gallery-item" onclick="openLightbox(0)" draggable="false">
                 <img src="assets/Cream Revenge (a joke).png" alt="Cream Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)" draggable="false">
                 <img src="assets/Divine kills Cream.png" alt="Divine kills Cream" class="gallery-item" onclick="openLightbox(2)" draggable="false">
                 <img src="assets/Divine kills Cream2.png" alt="Divine kills Cream2" class="gallery-item" onclick="openLightbox(3)" draggable="false">
-                <!-- ИСПРАВЛЕНО: теперь .png -->
-                <img src="assets/ldk.png" alt="ldk" class="gallery-item" onclick="openLightbox(4)" draggable="false">
+                <!-- Возвращаем .jpg, так как в консоли была ошибка .png -->
+                <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)" draggable="false">
                 <img src="assets/Reference sheet — Divine.png" alt="Reference sheet — Divine" class="gallery-item" onclick="openLightbox(5)" draggable="false">
                 <img src="assets/The divine being looks at you with curiosity..png" alt="The divine being looks at you with curiosity." class="gallery-item" onclick="openLightbox(6)" draggable="false">
                 <img src="assets/The first meeting with Alice.png" alt="The first meeting with Alice" class="gallery-item" onclick="openLightbox(7)" draggable="false">
@@ -381,7 +389,6 @@
                 <span class="lang-ru hidden">Появление</span>
             </h2>
             
-            <!-- АНГЛИЙСКАЯ ИСТОРИЯ -->
             <div class="lang-en">
                 <h3>The 1990s - The Ritual</h3>
                 <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
@@ -414,7 +421,6 @@
                 <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
             </div>
 
-            <!-- РУССКАЯ ИСТОРИЯ -->
             <div class="lang-ru hidden">
                 <h3>1990-е годы - Ритуал</h3>
                 <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
@@ -630,20 +636,25 @@
         <span class="close-btn" onclick="closeLightbox()">&times;</span>
         <div class="lightbox-content">
             <button class="nav-btn prev" onclick="changeImage(-1, event)">&#10094;</button>
+            
+            <!-- ДОБАВЛЕН ВОДЯНОЙ ЗНАК -->
+            <div class="watermark">© rudolfgods</div>
+            
             <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Image" draggable="false">
+            
             <button class="nav-btn next" onclick="changeImage(1, event)">&#10095;</button>
         </div>
         <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
 
     <script>
-        // Массив с картинками (ldk теперь .png)
         const galleryImages = [
             { src: "assets/Alice and the Divine.png", title_en: "Alice and the Divine", title_ru: "Алиса и Божественный" },
             { src: "assets/Cream Revenge (a joke).png", title_en: "Cream Revenge (a joke)", title_ru: "Месть Крим (шутка)" },
             { src: "assets/Divine kills Cream.png", title_en: "Divine kills Cream", title_ru: "Божественный убивает Крим" },
             { src: "assets/Divine kills Cream2.png", title_en: "Divine kills Cream2", title_ru: "Божественный убивает Крим 2" },
-            { src: "assets/ldk.png", title_en: "ldk", title_ru: "ldk" }, /* ИСПРАВЛЕНО */
+            /* Возвращено на .jpg из-за ошибки в консоли */
+            { src: "assets/ldk.jpg", title_en: "ldk", title_ru: "ldk" }, 
             { src: "assets/Reference sheet — Divine.png", title_en: "Reference sheet — Divine", title_ru: "Референс — Божественный" },
             { src: "assets/The divine being looks at you with curiosity..png", title_en: "The divine being looks at you with curiosity.", title_ru: "Божественное существо с любопытством смотрит на тебя" },
             { src: "assets/The first meeting with Alice.png", title_en: "The first meeting with Alice", title_ru: "Первая встреча с Алисой" },
@@ -713,11 +724,7 @@
             }
         }
 
-        // ==========================================
-        // ЗАЩИТА ОТ СКАЧИВАНИЯ И СКРИНШОТОВ
-        // ==========================================
-
-        // 1. Запрет контекстного меню (ПКМ) на картинках
+        // Защита (ПКМ и драг)
         document.addEventListener('contextmenu', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
@@ -725,21 +732,17 @@
             }
         });
 
-        // 2. Запрет перетаскивания (Drag & Drop) картинок
         document.addEventListener('dragstart', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // 3. Защита от PrintScreen (Скриншоты)
         document.addEventListener('keyup', function(e) {
             if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
-                // Копируем в буфер обмена текст вместо картинки
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText('Скриншоты запрещены автором сайта!');
                 }
-                // Размываем экран на секунду, чтобы скрин получился размытым
                 document.body.style.filter = 'blur(10px)';
                 setTimeout(() => {
                     document.body.style.filter = 'none';
@@ -747,25 +750,8 @@
             }
         });
 
-        // 4. Базовая защита от открытия кода (F12) и сохранения (Ctrl+S, Ctrl+U)
         document.addEventListener('keydown', function(e) {
-            // F12
-            if (e.key === 'F12' || e.code === 'F12') {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+Shift+I / Cmd+Opt+I
-            if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.metaKey && e.altKey && e.key === 'i')) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+U (Посмотреть код)
-            if ((e.ctrlKey && e.key === 'u') || (e.metaKey && e.key === 'u')) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+S (Сохранить страницу)
-            if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
+            if (e.key === 'F12' || e.code === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's')) {
                 e.preventDefault();
                 return false;
             }
