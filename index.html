@@ -36,8 +36,6 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-text-size-adjust: 100%;
-            
-            /* Защита от выделения текста и картинок */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -163,6 +161,18 @@
         .infobox-label { font-weight: bold; width: 40%; color: #b0b0b0; }
         .infobox-data { width: 60%; }
 
+        .infobox-data a {
+            color: #ff4d4d;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .infobox-data a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px #ff0000;
+        }
+
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
 
@@ -177,7 +187,6 @@
             gap: 10px;
         }
 
-        /* ГАЛЕРЕЯ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -201,7 +210,6 @@
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
-        /* ЛАЙТБОКС (ОКНО ПРОСМОТРА) */
         .lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -230,7 +238,6 @@
             -webkit-user-drag: none;
         }
 
-        /* ВОДЯНОЙ ЗНАК */
         .watermark {
             position: absolute;
             bottom: 15px;
@@ -376,12 +383,10 @@
                 <img src="assets/Cream Revenge (a joke).png" alt="Cream Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)" draggable="false">
                 <img src="assets/Divine kills Cream.png" alt="Divine kills Cream" class="gallery-item" onclick="openLightbox(2)" draggable="false">
                 <img src="assets/Divine kills Cream2.png" alt="Divine kills Cream2" class="gallery-item" onclick="openLightbox(3)" draggable="false">
-                <!-- Добавлен onerror, чтобы скрыть битую картинку, если имя файла не совпадает -->
-                <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)" draggable="false" onerror="this.style.display='none'">
-                <img src="assets/Reference sheet — Divine.png" alt="Reference sheet — Divine" class="gallery-item" onclick="openLightbox(5)" draggable="false">
-                <img src="assets/The divine being looks at you with curiosity..png" alt="The divine being looks at you with curiosity." class="gallery-item" onclick="openLightbox(6)" draggable="false">
-                <img src="assets/The first meeting with Alice.png" alt="The first meeting with Alice" class="gallery-item" onclick="openLightbox(7)" draggable="false">
-                <img src="assets/The first meeting with Alice2.png" alt="The first meeting with Alice2" class="gallery-item" onclick="openLightbox(8)" draggable="false">
+                <img src="assets/Reference sheet — Divine.png" alt="Reference sheet — Divine" class="gallery-item" onclick="openLightbox(4)" draggable="false">
+                <img src="assets/The divine being looks at you with curiosity..png" alt="The divine being looks at you with curiosity." class="gallery-item" onclick="openLightbox(5)" draggable="false">
+                <img src="assets/The first meeting with Alice.png" alt="The first meeting with Alice" class="gallery-item" onclick="openLightbox(6)" draggable="false">
+                <img src="assets/The first meeting with Alice2.png" alt="The first meeting with Alice2" class="gallery-item" onclick="openLightbox(7)" draggable="false">
             </div>
 
             <h2>
@@ -627,21 +632,33 @@
                     rudolfgods
                 </div>
             </div>
+
+            <div class="infobox-section-header">
+                <span class="lang-en">Social Media</span>
+                <span class="lang-ru hidden">Соцсети</span>
+            </div>
+            <div class="infobox-row">
+                <div class="infobox-label">X (Twitter)</div>
+                <div class="infobox-data"><a href="https://x.com/rudolfgods" target="_blank">@rudolfgods</a></div>
+            </div>
+            <div class="infobox-row">
+                <div class="infobox-label">Discord</div>
+                <div class="infobox-data"><a href="https://discord.com/users/1540356512264888320" target="_blank">Profile</a></div>
+            </div>
+            <div class="infobox-row">
+                <div class="infobox-label">Telegram</div>
+                <div class="infobox-data"><a href="https://t.me/rudaEZka" target="_blank">Channel</a></div>
+            </div>
         </div>
 
     </div>
 
-    <!-- ЛАЙТБОКС (ОКНО ПРОСМОТРА) -->
     <div id="lightbox" class="lightbox hidden">
         <span class="close-btn" onclick="closeLightbox()">&times;</span>
         <div class="lightbox-content">
             <button class="nav-btn prev" onclick="changeImage(-1, event)">&#10094;</button>
-            
-            <!-- ВОДЯНОЙ ЗНАК -->
             <div class="watermark">© rudolfgods</div>
-            
             <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged Image" draggable="false">
-            
             <button class="nav-btn next" onclick="changeImage(1, event)">&#10095;</button>
         </div>
         <div id="lightbox-caption" class="lightbox-caption"></div>
@@ -653,7 +670,6 @@
             { src: "assets/Cream Revenge (a joke).png", title_en: "Cream Revenge (a joke)", title_ru: "Месть Крим (шутка)" },
             { src: "assets/Divine kills Cream.png", title_en: "Divine kills Cream", title_ru: "Божественный убивает Крим" },
             { src: "assets/Divine kills Cream2.png", title_en: "Divine kills Cream2", title_ru: "Божественный убивает Крим 2" },
-            { src: "assets/ldk.jpg", title_en: "ldk", title_ru: "ldk" }, 
             { src: "assets/Reference sheet — Divine.png", title_en: "Reference sheet — Divine", title_ru: "Референс — Божественный" },
             { src: "assets/The divine being looks at you with curiosity..png", title_en: "The divine being looks at you with curiosity.", title_ru: "Божественное существо с любопытством смотрит на тебя" },
             { src: "assets/The first meeting with Alice.png", title_en: "The first meeting with Alice", title_ru: "Первая встреча с Алисой" },
@@ -723,25 +739,16 @@
             }
         }
 
-        // ==========================================
-        // УСИЛЕННАЯ ЗАЩИТА ОТ КОПИРОВАНИЯ И DEVTOOLS
-        // ==========================================
-
-        // 1. Блокировка контекстного меню по всей странице (ПКМ)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
-            // Раскомментируй строку ниже, если хочешь, чтобы выскакивало окно
-            // alert('Копирование и скачивание запрещено автором!');
         });
 
-        // 2. Запрет перетаскивания (Drag & Drop)
         document.addEventListener('dragstart', function(e) {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // 3. Защита от PrintScreen
         document.addEventListener('keyup', function(e) {
             if (e.key === 'PrintScreen' || e.code === 'PrintScreen') {
                 if (navigator.clipboard) {
@@ -754,51 +761,40 @@
             }
         });
 
-        // 4. Блокировка горячих клавиш DevTools
         document.addEventListener('keydown', function(e) {
-            // F12
             if (e.key === 'F12' || e.code === 'F12') {
                 e.preventDefault();
                 return false;
             }
-            // Ctrl+Shift+I / J / C (Инструменты разработчика)
             if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
                 e.preventDefault();
                 return false;
             }
-            // Cmd+Opt+I (для Mac)
             if (e.metaKey && e.altKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
                 e.preventDefault();
                 return false;
             }
-            // Ctrl+U (Посмотреть код)
             if ((e.ctrlKey && e.key === 'u') || (e.metaKey && e.key === 'u')) {
                 e.preventDefault();
                 return false;
             }
-            // Ctrl+S (Сохранить страницу)
             if ((e.ctrlKey && e.key === 's') || (e.metaKey && e.key === 's')) {
                 e.preventDefault();
                 return false;
             }
         });
 
-        // 5. Дополнительная защита от открытия консоли через меню браузера
-        // Этот скрипт проверяет, изменился ли размер окна (иногда так открывают консоль)
         let devtoolsOpen = false;
         const element = new Image();
         Object.defineProperty(element, 'id', {
             get: function() {
                 devtoolsOpen = true;
-                // Можно добавить редирект или скрытие контента
-                // document.body.innerHTML = "<h1>Доступ запрещен!</h1>";
             }
         });
         setInterval(function() {
             devtoolsOpen = false;
-            console.dir(element); // Если консоль открыта, сработает getter
+            console.dir(element);
         }, 1000);
-
     </script>
 </body>
 </html>
