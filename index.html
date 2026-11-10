@@ -194,7 +194,7 @@
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
-        /* СТИЛИ ДЛЯ ЛАЙТБОКСА (ОКНО НА ВЕСЬ ЭКРАН) */
+        /* СТИЛИ ДЛЯ ЛАЙТБОКСА */
         .lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -292,16 +292,18 @@
             <div class="music-player">
                 <span class="lang-en">🎵 Theme:</span>
                 <span class="lang-ru hidden">🎵 Тема:</span>
+                <!-- ИСПРАВЛЕНО: sounds/ -->
                 <audio controls loop>
-                    <source src="assets/-Divine SEE you 1-2 layer.ogg" type="audio/ogg">
+                    <source src="sounds/-Divine SEE you 1-2 layer.ogg" type="audio/ogg">
                 </audio>
             </div>
 
             <div class="music-player">
                 <span class="lang-en">🔊 Laugh:</span>
                 <span class="lang-ru hidden">🔊 Смех:</span>
+                <!-- ИСПРАВЛЕНО: sounds/ -->
                 <audio controls>
-                    <source src="assets/Divine_Laugh.mp3" type="audio/mpeg">
+                    <source src="sounds/Divine_Laugh.mp3" type="audio/mpeg">
                 </audio>
             </div>
 
@@ -345,14 +347,14 @@
                 <li>Творческий подход к убийствам.</li>
             </ul>
 
-            <!-- НОВЫЙ РАЗДЕЛ: ГАЛЕРЕЯ -->
             <h2>
                 <span class="lang-en">Gallery</span>
                 <span class="lang-ru hidden">Галерея</span>
             </h2>
             <div class="gallery-grid">
                 <img src="assets/Alice and the Divine.png" alt="Alice and the Divine" class="gallery-item" onclick="openLightbox(0)">
-                <img src="assets/Cream's Revenge (a joke).png" alt="Cream's Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)">
+                <!-- ИСПРАВЛЕНО: Убрал апостроф в имени файла -->
+                <img src="assets/Cream Revenge (a joke).png" alt="Cream Revenge (a joke)" class="gallery-item" onclick="openLightbox(1)">
                 <img src="assets/Divine kills Cream.png" alt="Divine kills Cream" class="gallery-item" onclick="openLightbox(2)">
                 <img src="assets/Divine kills Cream2.png" alt="Divine kills Cream2" class="gallery-item" onclick="openLightbox(3)">
                 <img src="assets/ldk.jpg" alt="ldk" class="gallery-item" onclick="openLightbox(4)">
@@ -367,7 +369,6 @@
                 <span class="lang-ru hidden">Появление</span>
             </h2>
             
-            <!-- АНГЛИЙСКАЯ ИСТОРИЯ -->
             <div class="lang-en">
                 <h3>The 1990s - The Ritual</h3>
                 <p>The Church of Azazel is a group of cultists from New York gathered late at night in a church to perform a ritual, at the behest of otherworldly forces, with the help of a book that was discovered in the cemetery by one of the cultists. It was decided to hold a ritual by summoning Thanatos (Dr. - Greek. Θάνατος, "death") is the personification of death in ancient Greek mythology.</p>
@@ -400,7 +401,6 @@
                 <p>After the events of 2003, the Divine drew Alice into a new world, she had no place for peace or logical explanations, the creature was so hungry for new knowledge about new worlds that he made a new vessel for the girl, in which she has been living ever since in this crazy world that follows her.</p>
             </div>
 
-            <!-- РУССКАЯ ИСТОРИЯ -->
             <div class="lang-ru hidden">
                 <h3>1990-е годы - Ритуал</h3>
                 <p>Церковь Азазеля - это группа культистов из Нью-Йорка, собравшихся поздно ночью в церкви, чтобы совершить ритуал, по велению потусторонних сил, с помощью книги, которая была обнаружена на кладбище одним из культистов. Было решено провести ритуал с призывом Танатоса (др. - греч. Χάνατος, "смерть") - олицетворения смерти в древнегреческой мифологии.</p>
@@ -623,10 +623,10 @@
     </div>
 
     <script>
-        // Массив с картинками (точные названия файлов из папки assets)
+        // Массив с картинками (ИСПРАВЛЕНО название Cream Revenge)
         const galleryImages = [
             { src: "assets/Alice and the Divine.png", title: "Alice and the Divine" },
-            { src: "assets/Cream's Revenge (a joke).png", title: "Cream's Revenge (a joke)" },
+            { src: "assets/Cream Revenge (a joke).png", title: "Cream Revenge (a joke)" },
             { src: "assets/Divine kills Cream.png", title: "Divine kills Cream" },
             { src: "assets/Divine kills Cream2.png", title: "Divine kills Cream2" },
             { src: "assets/ldk.jpg", title: "ldk" },
@@ -638,31 +638,26 @@
 
         let currentImgIndex = 0;
 
-        // Открыть галерею
         function openLightbox(index) {
             currentImgIndex = index;
             updateLightbox();
             document.getElementById('lightbox').classList.remove('hidden');
         }
 
-        // Закрыть галерею
         function closeLightbox() {
             document.getElementById('lightbox').classList.add('hidden');
         }
 
-        // Переключение картинок (вперед/назад)
         function changeImage(direction, event) {
-            if (event) event.stopPropagation(); // Чтобы клик по стрелке не закрывал окно
+            if (event) event.stopPropagation();
             currentImgIndex += direction;
             
-            // Зацикливаем галерею (если дошли до конца - начинаем сначала)
             if (currentImgIndex >= galleryImages.length) currentImgIndex = 0;
             if (currentImgIndex < 0) currentImgIndex = galleryImages.length - 1;
             
             updateLightbox();
         }
 
-        // Обновление картинки и текста в окне
         function updateLightbox() {
             const imgElement = document.getElementById('lightbox-img');
             const captionElement = document.getElementById('lightbox-caption');
@@ -671,14 +666,12 @@
             captionElement.textContent = galleryImages[currentImgIndex].title;
         }
 
-        // Закрытие по клику на темный фон
         document.getElementById('lightbox').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeLightbox();
             }
         });
 
-        // Переключение языков
         function setLang(lang) {
             const enElements = document.querySelectorAll('.lang-en');
             const ruElements = document.querySelectorAll('.lang-ru');
